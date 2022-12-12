@@ -10,12 +10,14 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
   web:
-    image: chelseasaunders/foodtrucks-web
+    build: . # replaced image with build
     command: python3 app.py
+    environment:
+      - DEBUG=True # set an env var for flask
     depends_on:
       - es
     ports:
-      - 5000:5000
+      - "5000:5000"
     volumes:
       - ./flask-app:/opt/flask-app
 volumes:
